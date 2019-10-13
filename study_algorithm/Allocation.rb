@@ -14,20 +14,4 @@ def check(q, n, k, w)
     i
 end
 
-def solve(n, k, w)
-    left = 0
-    right = 100000 * 100000
-    mid = 0
-    while right - left > 1 do
-        mid = (left + right) / 2
-        v = check(mid, n, k, w)
-        if v >= n
-            right = mid
-        else
-            left = mid
-        end
-    end
-    right
-end
-
-puts solve(n, k, w)
+puts (0..(100000 * 100000)).bsearch{|x| check(x, n, k, w) >= n}
