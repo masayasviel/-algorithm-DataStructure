@@ -2,22 +2,14 @@ function main(input){
     input = input.split("");
     let output = "";
     let ptr = 0;
-    let data = [0, null];
+    let data = [0];
     let bracketIndex = [];
-    let skipCounter = 0
 
     for(let i = 0;i < input.length;i++){
-        if(skipCounter != 0 && /[^\[\]]/.test(input[i])){
-            ptr++;
-            continue;
-        }
         switch(input[i]){
             case ">":
                 ptr++;
-                if(data[ptr] == null){
-                    data[ptr] = 0;
-                    data.push(null);
-                }
+                if(data.length-1 <= i) data.push(0);
                 break;
             case "<":
                 ptr--;
@@ -32,22 +24,18 @@ function main(input){
                 output += String.fromCharCode(data[ptr]);
                 break;
             case "[":
-                if(data[ptr] != 0){
-                    bracketIndex.push(i);
-                }else{
-                    skipCounter++;
-                }
-                break;
-            case "]":
-                if(data[ptr] != 0){
-                    i = bracketIndex.pop()-1;
-                }else{
-                    if(skipCounter == 0){
-                        bracketIndex.pop();
-                    }else{
-                        skipCounter--;
+                if(data[ptr] == 0){
+                    let depth = 1;
+                    while(depth!=0){
+                        i++;
+                        if(input[i]=="[") depth++;
+                        if(input[i]=="]") depth--;
                     }
                 }
+                bracketIndex.push(i);
+                break;
+            case "]":
+                i = bracketIndex.pop()-1;
                 break;
         }
     }
