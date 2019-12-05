@@ -54,7 +54,7 @@ function main(input){
     console.log(output);
 }
 
-const command = "++++>++><<[->[->>+<<]>>[-<+<+>>]<<<]>>++++++++++++++++++++++++++++++++++++++++++++++++.";
+const command = "";
 
 main(command);
 
