@@ -8,7 +8,7 @@ function main(input){
 
     for(let i = 0;i < input.length;i++){
         if(skipCounter != 0 && /[^\[\]]/.test(input[i])){
-            ptr++;
+            // ptr++;
             continue;
         }
         switch(input[i]){
@@ -54,7 +54,7 @@ function main(input){
     console.log(output);
 }
 
-const command = "";
+const command = "++++>++><<[->[->>+<<]>>[-<+<+>>]<<<]>>++++++++++++++++++++++++++++++++++++++++++++++++.";
 
 main(command);
 
