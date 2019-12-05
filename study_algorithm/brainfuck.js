@@ -24,11 +24,18 @@ function main(input){
                 output += String.fromCharCode(data[ptr]);
                 break;
             case "[":
+                if(data[ptr] == 0){
+                    let depth = 1;
+                    while(depth!=0){
+                        i++;
+                        if(input[i]=="[") depth++;
+                        if(input[i]=="]") depth--;
+                    }
+                }
                 bracketIndex.push(i);
                 break;
             case "]":
-                if(data[ptr] == 0) bracketIndex.pop();
-                else i = bracketIndex[bracketIndex.length-1];
+                i = bracketIndex.pop()-1;
                 break;
         }
     }
