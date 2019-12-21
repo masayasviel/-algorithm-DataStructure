@@ -34,6 +34,7 @@ function main(input){
                         if(input[i]=="[") depth++;
                         if(input[i]=="]") depth--;
                     }
+                    break;
                 }
                 bracketIndex.push(i);
                 break;
