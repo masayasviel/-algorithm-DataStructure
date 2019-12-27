@@ -1,3 +1,5 @@
+// ある文字列が、すべて固有である(重複する文字がない)かどうかを判定する
+
 const str = "nisioisin"
 function main(input){
     let arr1 = input.split("");

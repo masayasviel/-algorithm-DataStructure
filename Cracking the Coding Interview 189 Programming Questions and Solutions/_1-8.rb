@@ -1,3 +1,5 @@
+# M×N行列について、要素が0であれば、その行と列全てを0にする
+
 def main(input)
     result = input.map(&:dup)
     checkZero(input, result)
