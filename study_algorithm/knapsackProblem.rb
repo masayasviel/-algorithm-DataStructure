@@ -11,6 +11,8 @@ ans = Array.new(n+1).map{Array.new(capacity+1, 0)}
             else
                 ans[i][j] = ans[i-1][j]
             end
+        else
+            ans[i][j] = ans[i-1][j]
         end
     end
 end
