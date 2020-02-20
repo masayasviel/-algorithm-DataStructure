@@ -1,0 +1,1 @@
+gets.chomp.size.times{|i| puts i+1}

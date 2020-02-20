@@ -1,5 +1,3 @@
-# https://atcoder.jp/contests/nikkei2019-ex/tasks/nikkei2019ex_f
-
 n = gets.chomp.to_i
 
 1.upto(n) do |i|

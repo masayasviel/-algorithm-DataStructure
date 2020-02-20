@@ -1,0 +1,1 @@
+puts "1" + ("0"*(gets.chomp.to_i-1))
