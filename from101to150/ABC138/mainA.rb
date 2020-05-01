@@ -1,0 +1,1 @@
+puts gets.chomp.to_i >= 3200 ? gets.chomp : "red"
