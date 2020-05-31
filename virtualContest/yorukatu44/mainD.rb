@@ -1,3 +1,5 @@
+# https://atcoder.jp/contests/abc112/tasks/abc112_d
+
 n, m = gets.chomp.split(" ").map(&:to_i)
 divisor = []
 i = 1
