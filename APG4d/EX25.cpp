@@ -1,8 +1,8 @@
 #include <bits/stdc++.h>
 using namespace std;
- 
+
 // 各操作を行う関数を実装する
- 
+
 // AとBに共通して含まれる要素からなる集合を返す
 bitset<50> intersection(bitset<50> A, bitset<50> B) {
     return A & B;
@@ -34,13 +34,11 @@ bitset<50> decrement(bitset<50> A) {
     if(is0) A.set(49, 1);
     return A;
 }
- 
 // Sに値xを加える
 bitset<50> add(bitset<50> S, int x) {
   S.set(x, 1);  // xビット目を1にする
   return S;
 }
- 
 // 集合Sの内容を昇順で出力する(スペース区切りで各要素の値を出力する)
 void print_set(bitset<50> S) {
     vector<int> cont;
@@ -55,9 +53,9 @@ void print_set(bitset<50> S) {
     }
     cout << endl;
 }
- 
+
 // これより下は書き換えない
- 
+
 int main() {
     bitset<50> A, B;
     int N;
@@ -74,11 +72,11 @@ int main() {
         cin >> x;
         B = add(B, x);
     }
- 
+
     // 操作
     string com;
     cin >> com;
- 
+
     if(com == "intersection") {
         print_set(intersection(A, B));
     }else if(com == "union_set") {
