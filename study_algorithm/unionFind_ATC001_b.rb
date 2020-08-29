@@ -1,12 +1,7 @@
 class UnionFind
     def initialize(n)
-        @parent = []
-        @rank = []
-
-        n.times do |i|
-            @parent[i] = i
-            @rank[i] = 0
-        end
+        @parent = [*0...n]
+        @rank = Array.new(n, 0)
     end
     def findSet(x)
         @parent[x] = findSet(@parent[x]) if x != @parent[x]

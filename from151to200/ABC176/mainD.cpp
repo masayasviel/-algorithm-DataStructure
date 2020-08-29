@@ -8,7 +8,6 @@ const int MAX = 1010;
 const int INF = 1000000000;
  
 int main() {
-    cout << "hoge" << endl;
     int H, W, sy, sx, gy, gx;
     int dx[4] = {0, 1, 0, -1}, dy[4] = {1, 0, -1, 0};
     int dist[MAX][MAX];
@@ -56,4 +55,5 @@ int main() {
     }
     if(dist[gy][gx] == INF) cout << -1 << endl;
     else cout << dist[gy][gx] << endl;
+    return 0;
 }
