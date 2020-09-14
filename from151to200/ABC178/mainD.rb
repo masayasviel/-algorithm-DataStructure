@@ -6,7 +6,9 @@ dp[0] = 1
     ((i-3)+1).times do |j|
         dp[i] += dp[j]
         dp[i] %= MOD
+        # puts "[" + [i, j].join(", ") + "]" + ": [" + dp.join(", ") + "]"
     end if (i-3)+1 > 0
+    # puts i.to_s + ": [" + dp.join(", ") + "]"
 end
 
 puts dp[s]
