@@ -1,0 +1,1 @@
+puts gets.chomp.count("x") < 8 ? "YES": "NO"
