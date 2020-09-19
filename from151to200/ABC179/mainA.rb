@@ -1,0 +1,1 @@
+puts (s = gets.chomp)[-1] == "s" ? s+"es" : s+"s"
