@@ -1,0 +1,1 @@
+puts "ACL" * gets.chomp.to_i

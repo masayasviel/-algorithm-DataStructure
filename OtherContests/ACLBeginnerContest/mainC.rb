@@ -21,28 +21,23 @@ class UnionFind
     def unite(x, y)
         link(findSet(x), findSet(y))
     end
-    def get_parent(x)
-        return findSet(x)
+    def get_parent(idx)
+        return findSet(idx)
     end
 end
 
-def main
-    n, q = gets.chomp.split(" ").map(&:to_i)
-    uf = UnionFind.new(n)
-    ans = []
-    q.times do |i|
-        com, x, y = gets.chomp.split(" ").map(&:to_i)
-        if com == 0 then
-            uf.unite(x, y)
-        elsif com == 1 then
-            if uf.same(x, y) then
-                ans << 1
-            else
-                ans << 0
-            end
-        end
-    end
-    puts ans.join(", ")
+n, m = gets.chomp.split.map(&:to_i)
+uf = UnionFind.new(n)
+m.times do
+    a, b = gets.chomp.split.map(&:to_i)
+    uf.unite(a-1, b-1)
 end
 
-main
+h = Hash.new(0)
+
+n.times do |i|
+    tmp = uf.get_parent(i)
+    h[tmp] += 1
+end
+
+puts h.size-1
