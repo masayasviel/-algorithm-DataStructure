@@ -17,9 +17,7 @@ B = 16
     column.times do |i|
         B.times do |j|
             tmp = b + j
-            print tmp
             x = tmp < row ? tmp : row-1
-            print x.to_s + "||"
             transpoted_matrix[i * row + x] = matrix[x * column + i]
         end
     end
