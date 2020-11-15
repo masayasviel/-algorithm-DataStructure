@@ -32,20 +32,20 @@ lights.each do |lr_x, lr_y|
 end
 
 # up-down
-lights.each do |lr_x, lr_y|
-    next if columns[lr_y][lr_x] == :bright
+lights.each do |ud_x, ud_y|
+    next if columns[ud_y][ud_x] == :bright
     # up
-    lr_y.downto(0) do |y|
-        break if columns[y][lr_x] == :block
-        columns[y][lr_x] = :bright
+    ud_y.downto(0) do |y|
+        break if columns[y][ud_x] == :block
+        columns[y][ud_x] = :bright
     end
     # down
-    lr_y.upto(h-1) do |y|
-        break if columns[y][lr_x] == :block
-        columns[y][lr_x] = :bright
+    ud_y.upto(h-1) do |y|
+        break if columns[y][ud_x] == :block
+        columns[y][ud_x] = :bright
     end
     # self
-    columns[lr_y][lr_x] = :bright
+    columns[ud_y][ud_x] = :bright
 end
 
 ans = 0
