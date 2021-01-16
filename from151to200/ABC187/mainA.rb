@@ -1,0 +1,1 @@
+puts gets.chomp.split.map{|x| x.split("").map(&:to_i).sum}.max
