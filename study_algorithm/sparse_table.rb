@@ -26,10 +26,10 @@ class SparseTable
             k += 1
         end
     end
-    # @param 半開区間[s, t)
+    # @param 区間[s..t]
     # @return 最小値のインデックス
     def query(s, t)
-        d = t - s
+        d = t - s + 1
         k = @log_table[d]
         if @arr[@table[s][k]] < @arr[@table[t - (1 << k) + 1][k]]
             return @table[s][k]
