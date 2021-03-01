@@ -1,61 +1,98 @@
 class PriorityQueue
-    def initialize(arr)
-        @size = arr.size
-        @array = arr
-        @array.unshift(nil)
-        h = (@size / 2) | 0
-        h.downto(1) do |i|
-            maxHeapify(i)
-        end
+    # By default, the priority queue returns the maximum element first.
+    # If a block is given, the priority between the elements is determined with it.
+    # For example, the following block is given, the priority queue returns the minimum element first.
+    # `PriorityQueue.new { |x, y| x < y }`
+    #
+    # A heap is an array for which a[k] <= a[2*k+1] and a[k] <= a[2*k+2] for all k, counting elements from 0.
+    def initialize(array = [], &comp)
+        @heap = array
+        @comp = comp || proc { |x, y| x > y }
+        heapify
     end
-    def getArray
-        return @array[1..@size]
+   
+    attr_reader :heap
+   
+    # Push new element to the heap.
+    def push(item)
+        shift_down(0, @heap.push(item).size - 1)
     end
-    def maxHeapify(i)
-        left = 2 * i
-        right = 2 * i + 1
-        largest = 0
-        if left <= @size && @array[left] > @array[i]
-            largest = left
-        else
-            largest = i
-        end
-        if right <= @size && @array[right] > @array[largest]
-            largest = right
-        end
-        if largest != i
-            @array[i], @array[largest] = @array[largest], @array[i]
-            maxHeapify(largest)
-        end
-    end
+   
+    alias << push
+    alias append push
+   
+    # Pop the element with the highest priority.
     def pop
-        return -(1<<29) if @size < 1
-        maxv = @array[1]
-        @array[1] = @array[@size]
-        @size -= 1
-        maxHeapify(1)
-        maxv
+        latest = @heap.pop
+        return latest if empty?
+    
+        ret_item = heap[0]
+        heap[0] = latest
+        shift_up(0)
+        ret_item
     end
-    def push(e)
-        @size += 1
-        i = @size
-        @array[i] = -(1<<29)
-        return if e < @array[i]
-        @array[i] = e
-        while i > 1 && @array[i/2] < @array[i]
-            @array[i], @array[i/2] = @array[i/2], @array[i]
-            i = i / 2
+   
+    # Get the element with the highest priority.
+    def get
+        @heap[0]
+    end
+   
+    alias top get
+   
+    # Returns true if the heap is empty.
+    def empty?
+        @heap.empty?
+    end
+   
+    private
+   
+    def heapify
+        (@heap.size / 2 - 1).downto(0) do |i|
+            shift_up(i)
         end
+    end
+   
+    def shift_up(pos)
+        end_pos = @heap.size
+        start_pos = pos
+        new_item = @heap[pos]
+        left_child_pos = 2 * pos + 1
+    
+        while left_child_pos < end_pos do
+            right_child_pos = left_child_pos + 1
+            if right_child_pos < end_pos && @comp.call(@heap[right_child_pos], @heap[left_child_pos]) then
+                left_child_pos = right_child_pos
+            end
+            # Move the higher priority child up.
+            @heap[pos] = @heap[left_child_pos]
+            pos = left_child_pos
+            left_child_pos = 2 * pos + 1
+        end
+        @heap[pos] = new_item
+        shift_down(start_pos, pos)
+    end
+   
+    def shift_down(star_pos, pos)
+        new_item = @heap[pos]
+        while pos > star_pos do
+            parent_pos = (pos - 1) >> 1
+            parent = @heap[parent_pos]
+            break if @comp.call(parent, new_item)
+    
+            @heap[pos] = parent
+            pos = parent_pos
+        end
+        @heap[pos] = new_item
     end
 end
 
-n, m = gets.chomp.split(" ").map(&:to_i)
-a = gets.chomp.split(" ").map(&:to_i)
+n, m = gets.chomp.split.map(&:to_i)
+a = gets.chomp.split.map(&:to_i)
 pq = PriorityQueue.new(a)
 m.times do |i|
     largest = pq.pop
     largest = largest / 2
-    pq.push(largest)
+    pq << largest
 end
 
-print pq.getArray.inject(:+)
+print pq.heap.sum
