@@ -86,13 +86,22 @@ class PriorityQueue
     end
 end
 
-n, m = gets.chomp.split.map(&:to_i)
-a = gets.chomp.split.map(&:to_i)
-pq = PriorityQueue.new(a)
-m.times do |i|
-    largest = pq.pop
-    largest = largest / 2
-    pq << largest
+N, K = gets.chomp.split.map(&:to_i)
+P = gets.chomp.split.map(&:to_i)
+
+k_from_behind = PriorityQueue.new(P.slice(0, K)) { |x, y| x < y }
+next_P = P.slice(K, N)
+
+current_min = k_from_behind.pop
+ans = [current_min]
+
+until next_P.empty? do
+    tmp_P = next_P.shift
+    if tmp_P > current_min then
+        k_from_behind.push(tmp_P)
+        current_min = k_from_behind.pop
+    end
+    ans << current_min
 end
 
-print pq.heap.sum
+puts ans.join("\n")
